@@ -24,7 +24,7 @@ const parama = {
 };
 const jwtExpirySeconds = 300;
 
-const { myStore,users,orders } = require("./storeData");
+const { myStore,users,orders,cart } = require("./storeData");
 
 let strategyAll = new JWTStrategy(parama,function(token,done){
     console.log("In JWTStrategy-All", token);
@@ -180,4 +180,30 @@ app.post("/register",function (req, res){
     console.log(newUser);
     res.send(newUser);
     
+});
+
+app.get("/cart",async function(req, res){
+    try{
+        res.send(cart);
+    }catch (error){
+        if (error.response){
+            let { status, statusText } = error.response;
+            res.status(status).send(statusText);
+        }else res.status(484).send(error);
+    }
+});
+
+app.post("/cart",function (req, res){
+    let body = req.body;
+    cart.push(body);
+    res.send("success")
+    console.log(body);
+    
+});
+
+app.delete("/cart",function (req, res){
+    let len = cart.length;
+    cart.splice(0,len);
+    // cart=[];
+    res.send("success")
 });

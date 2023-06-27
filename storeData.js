@@ -183,4 +183,5 @@ let orders=[
   {name:"Amar",address:"kestopur,Street 56",city:"Ranchi",totalPrice:797,items:3,email:"gmail@test.com"},
 ];
 
-module.exports= {myStore,users,orders};
+let cart=[];
+module.exports= {myStore,users,orders,cart};
